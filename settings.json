@@ -1,1 +1,20 @@
-C:/Users/ferra/AppData/Roaming/Code/User/settings.json
+{
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "editor.scrollBeyondLastLine": false,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "workbench.colorTheme": "Visual Studio Dark",
+       "editor.lineHeight": 25,
+       "editor.letterSpacing": 0.5,
+       "files.trimTrailingWhitespace": true,
+       "editor.fontWeight": "400",
+       "prettier.eslintIntegration": true,
+       "editor.cursorBlinking": "solid",
+    "editor.renderWhitespace": "all",
+    "terminal.integrated.gpuAcceleration": "off",
+    "C_Cpp.updateChannel": "Insiders",
+}

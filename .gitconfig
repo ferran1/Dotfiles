@@ -1,1 +1,24 @@
-C:/Users/ferra/.gitconfig
+[core]
+    pager = "less -x5,9"
+    editor = "vim"
+    symlinks = true
+[user]
+	email = =
+	name = =
+[alias]
+	c = commit
+	a = add .
+	p = push
+    co = checkout
+    df = diff
+    lg = log -p
+    ap = add --patch
+    track = add -N
+	s = status
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[credential]
+	helper = wincred
