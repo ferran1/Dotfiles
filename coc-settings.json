@@ -1,0 +1,25 @@
+{
+  "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "python",
+    "typescript",
+    "typescriptreact",
+    "json",
+    "javascriptreact",
+    "typescript.tsx",
+    "graphql"
+  ],
+  "python.analysis.diagnosticMode": "workspace",
+  "eslint.run": "onSave",
+  "eslint.autoFixOnSave": true,
+  "eslint.format.enable": true,
+  "pyright.enable": true,
+  "python.pythonPath": "python",
+  "python.linting.pylintEnabled": false,
+  "python.linting.flake8Enabled": true,
+  "python.linting.flake8Path": "flake8",
+  "python.linting.enabled": true,
+  "python.formatting.provider": "black",
+  "python.sortImports.path": "isort"
+}
