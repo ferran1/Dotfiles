@@ -63,7 +63,7 @@ set completeopt=menuone,longest
 set shortmess+=c
 
 " enable 256 colors
-"set t_Co=256
+set t_Co=256
 
 " Switch between case sensitive and insensitive automatically during search
 set smartcase
@@ -128,6 +128,32 @@ let g:coc_global_extensions = [
 			\ 'coc-html',
 \ ]
 
+"--- Coc config ---
+
+"Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
+
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Prettier command for coc (Executes on save, coc-settings.json specifies all
+" file types for prettier)
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
 " Git gutter config (Plugin that shows git diff in side column)
 highlight GitGutterAdd guifg=#009900 ctermfg=Green
 highlight GitGutterChange guifg=#bbbb00 ctermfg=Yellow
@@ -180,6 +206,9 @@ let g:neomake_open_list = 2
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
+"ctrlp ignore gitignored files
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
 " Open Nerdtree and startify correctly at the same time when starting vim
 autocmd VimEnter *
 \ if !argc()
@@ -189,8 +218,33 @@ autocmd VimEnter *
 \ | wincmd w
 \ | endif
 
-"vim jinja config
+" sync open file with NERDTree
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
+
+" vim jinja config
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
+
+" Nerd commenter keybindings
+let g:NERDCreateDefaultMappings = 0
+
+" Set nerd commenter toggle to Ctrl + l
+nmap <C-l> <plug>NERDCommenterToggle
+xmap <C-l> <plug>NERDCommenterToggle
 
 "Automatic load Colorizer for HTML and CSS files
 :let g:colorizer_auto_filetype='css,html'
