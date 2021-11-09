@@ -26,10 +26,9 @@ Plug 'mhinz/vim-startify'
 Plug 'chrisbra/Colorizer'
 Plug 'szw/vim-maximizer'
 Plug 'justinmk/vim-sneak'
-Plug 'markonm/traces.vim'
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
-"Additional two libs needed for snipmate
+" Additional two libs needed for snipmate
 Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
 call plug#end()
@@ -38,27 +37,27 @@ set autoread
 call plug#end()
 
 set backspace=2
-set laststatus=2 "Always show the statusbar
+set laststatus=2 " Always show the statusbar
 set clipboard=unnamed
 set nu
-set relativenumber "Turn on line numbering
+set relativenumber " Turn on line numbering
 
-"Hide the menu bar:
+" Hide the menu bar
 set guioptions -=m
 
-"Set tabbar to text mode
+" Set tabbar to text mode
 set guioptions -=e
 
-"Hide the tool bar:
+" Hide the tool bar
 set guioptions -=T
 
 set guioptions +=d
 
-"Correct comment highlighting
+" Correct comment highlighting
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Settings for AutoComplPop
-set complete+=kspell "Makes sure difficult words can get autocompleted when typing ctrl + p in insert mode"
+set complete+=kspell " Makes sure difficult words can get autocompleted when typing ctrl + p in insert mode"
 set completeopt=menuone,longest
 set shortmess+=c
 
@@ -76,7 +75,7 @@ set fileencoding=utf-8
 
 set nocompatible
 
-"Sane editing
+" Sane editing
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
@@ -87,11 +86,11 @@ set viminfo='25,\"50,n~/.viminfo
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
-"
+
 " auto-pairs
 au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
 
-"Set filetype for python
+" Set filetype for python
 autocmd BufNewFile,BufRead *.py set ft=python
 
 filetype on
@@ -130,7 +129,7 @@ let g:coc_global_extensions = [
 
 "--- Coc config ---
 
-"Remap for rename current word
+" Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
 
 " Apply AutoFix to problem on the current line.
@@ -163,7 +162,7 @@ nmap ( <Plug>(GitGutterPrevHunk)
 let g:gitgutter_enabled = 1
 let g:gitgutter_map_keys = 0
 
-"Tagbar Settings
+" Tagbar Settings
 nmap <f8> :TagbarToggle<CR>
 
 " Fugitive vim remaps
@@ -180,7 +179,7 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
-"gg ale plugin (linters)
+" gg ale plugin (linters)
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
@@ -195,18 +194,18 @@ let g:ale_completion_autoimport = 1
 nmap <C-e> <Plug>(ale_next_wrap)
 nmap <C-r> <Plug>(ale_previous_wrap)
 
-"Neomake (Synax checker) Full config: when writing or reading a buffer, and on changes in insert and
+" Neomake (Synax checker) Full config: when writing or reading a buffer, and on changes in insert and
 " normal mode (after 500ms; no delay when writing).
 call neomake#configure#automake('nrwi', 500)
 
-"Open the Neomake list (The list that shows up when there are errors in a file) automatically
+" Open the Neomake list (The list that shows up when there are errors in a file) automatically
 let g:neomake_open_list = 2
 
-"ctrlp vim (search for files) settings
+" ctrlp vim (search for files) settings
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-"ctrlp ignore gitignored files
+" ctrlp ignore gitignored files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " Open Nerdtree and startify correctly at the same time when starting vim
@@ -218,24 +217,6 @@ autocmd VimEnter *
 \ | wincmd w
 \ | endif
 
-" sync open file with NERDTree
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
-
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
-
 " vim jinja config
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 
@@ -243,16 +224,16 @@ au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
 let g:NERDCreateDefaultMappings = 0
 
 " Set nerd commenter toggle to Ctrl + l
-nmap <C-l> <plug>NERDCommenterToggle
-xmap <C-l> <plug>NERDCommenterToggle
+nmap <C-o> <plug>NERDCommenterToggle
+xmap <C-o> <plug>NERDCommenterToggle
 
-"Automatic load Colorizer for HTML and CSS files
+" Automatic load Colorizer for HTML and CSS files
 :let g:colorizer_auto_filetype='css,html'
 
-"Snip mate config
+" Snip mate config
 let g:snipMate = { 'snippet_version' : 1 }
 
-"Vim sneak
+" Vim sneak
 let g:sneak#label = 1
 
 " ---- vim-closetag plugin config ----
