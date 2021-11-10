@@ -12,7 +12,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/indentpython.vim'
 Plug 'lepture/vim-jinja'
 Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
@@ -34,13 +33,19 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 call plug#end()
 
 set autoread
-call plug#end()
 
 set backspace=2
 set laststatus=2 " Always show the statusbar
 set clipboard=unnamed
 set nu
 set relativenumber " Turn on line numbering
+
+" TextEdit might fail if hidden is not set.
+set hidden
+
+" Some servers have issues with backup files
+set nobackup
+set nowritebackup
 
 " Hide the menu bar
 set guioptions -=m
@@ -53,11 +58,15 @@ set guioptions -=T
 
 set guioptions +=d
 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
 " Correct comment highlighting
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " Settings for AutoComplPop
-set complete+=kspell " Makes sure difficult words can get autocompleted when typing ctrl + p in insert mode"
+"set complete+=kspell " Makes sure difficult words can get autocompleted (Automatically)
 set completeopt=menuone,longest
 set shortmess+=c
 
@@ -132,22 +141,57 @@ let g:coc_global_extensions = [
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
 
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+" Map coc autofix to Alt + f
+nmap <M-f> <Plug>(coc-fix-current)
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use K to show documentation in preview window
+" Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
     execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
   else
-    call CocAction('doHover')
+    execute '!' . &keywordprg . " " . expand('<cword>')
   endif
 endfunction
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" coc map gr to Go reference
+nmap <silent> gr <Plug>(coc-references)
+
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+
+" `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+"" Coc-snippets (enable tabs)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " Prettier command for coc (Executes on save, coc-settings.json specifies all
 " file types for prettier)
