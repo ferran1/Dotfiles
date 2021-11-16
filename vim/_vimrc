@@ -1,6 +1,4 @@
 syntax on
-"colorscheme pixelmuerto
-"colorscheme iceberg
 colorscheme anderson
 
 call plug#begin('~/vimfiles/plugged')
@@ -47,6 +45,25 @@ set hidden
 set nobackup
 set nowritebackup
 
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Set starting size of gVim window
+if has("gui_running")
+  " GUI is running or is about to start.
+  " Maximize gvim window.
+  set lines=999 columns=999
+else
+  " For console vim
+  if exists("+lines")
+    set lines=50
+  endif
+  if exists("+columns")
+    set columns=100
+  endif
+endif
+
 " Hide the menu bar
 set guioptions -=m
 
@@ -57,10 +74,6 @@ set guioptions -=e
 set guioptions -=T
 
 set guioptions +=d
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
 
 " Correct comment highlighting
 autocmd FileType json syntax match Comment +\/\/.\+$+
@@ -95,6 +108,12 @@ set viminfo='25,\"50,n~/.viminfo
 autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
+
+" Remap space so that it works while in normal mode
+"noremap <Space> i<Space><Right><ESC>
+
+" Remap f9 to save and run a python file
+map <F9> :w<CR>:!python %<CR>
 
 " auto-pairs
 au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b'" : "'"})
@@ -138,7 +157,7 @@ let g:coc_global_extensions = [
 
 "--- Coc config ---
 
-" Remap for rename current word
+"" Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
 
 " Map coc autofix to Alt + f
@@ -164,9 +183,9 @@ endfunction
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-" coc map gr to Go reference
+" coc GoTo code navigation
 nmap <silent> gr <Plug>(coc-references)
-
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 
