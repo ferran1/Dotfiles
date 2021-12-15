@@ -17,4 +17,9 @@
     "editor.renderWhitespace": "all",
     "terminal.integrated.gpuAcceleration": "off",
     "C_Cpp.updateChannel": "Insiders",
+
+
+    /**
+    * Vim settings
+    **/
 }

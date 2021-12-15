@@ -2,32 +2,54 @@ syntax on
 colorscheme anderson
 
 call plug#begin('~/vimfiles/plugged')
+
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+"Additional text editing support (Custom plugins for linters etc)
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+
+Plug 'dense-analysis/ale'
+
 Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
-Plug 'lepture/vim-jinja'
-Plug 'pangloss/vim-javascript'
 Plug 'alvan/vim-closetag'
-Plug 'maxmellon/vim-jsx-pretty'
-Plug 'dense-analysis/ale'
+
+" Autocompletes
 Plug 'vim-scripts/AutoComplPop'
+
+" Comment lines with custom keybind <ctrl+o>
 Plug 'preservim/nerdcommenter'
+
+" Linting
 Plug 'neomake/neomake'
+
+" Syntax highlighting for JS
+Plug 'pangloss/vim-javascript'
+
+" Fuzzy finder in vim
 Plug 'kien/ctrlp.vim'
+
+" Fancy vim start up screen
 Plug 'mhinz/vim-startify'
+
 Plug 'chrisbra/Colorizer'
+
+" Maximize window/split with <f3>
 Plug 'szw/vim-maximizer'
+
+" <s> and <S> to jump to any location using 2 characters
 Plug 'justinmk/vim-sneak'
+
+" Snippets
 Plug 'honza/vim-snippets'
 Plug 'garbas/vim-snipmate'
-" Additional two libs needed for snipmate
 Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
+
 call plug#end()
 
 set autoread
@@ -109,8 +131,9 @@ autocmd FileType html setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType css setlocal tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType javascript setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
-" Remap space so that it works while in normal mode
-"noremap <Space> i<Space><Right><ESC>
+" Remap escape key to jk and kj to get out of insert mode quickly
+imap kj <Esc>
+imap jk <Esc>
 
 " Remap f9 to save and run a python file
 map <F9> :w<CR>:!python %<CR>
