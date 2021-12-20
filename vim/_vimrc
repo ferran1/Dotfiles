@@ -71,11 +71,22 @@ set nowritebackup
 " delays and poor user experience.
 set updatetime=300
 
-" Set starting size of gVim window
+" GUI is running or is about to start.
 if has("gui_running")
-  " GUI is running or is about to start.
   " Maximize gvim window.
   set lines=999 columns=999
+
+  " Hide the menu bar
+  set guioptions -=m
+
+  " Set tabbar to text mode
+  set guioptions -=e
+
+  " Hide the tool bar
+  set guioptions -=T
+
+  set guioptions +=d
+
 else
   " For console vim
   if exists("+lines")
@@ -85,17 +96,6 @@ else
     set columns=100
   endif
 endif
-
-" Hide the menu bar
-set guioptions -=m
-
-" Set tabbar to text mode
-set guioptions -=e
-
-" Hide the tool bar
-set guioptions -=T
-
-set guioptions +=d
 
 " Correct comment highlighting
 autocmd FileType json syntax match Comment +\/\/.\+$+
