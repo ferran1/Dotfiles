@@ -176,6 +176,7 @@ let g:coc_global_extensions = [
 			\ 'coc-stylelint',
 			\ 'coc-markdownlint',
 			\ 'coc-html',
+			\ 'coc-css',
 \ ]
 
 "--- Coc config ---
@@ -293,6 +294,9 @@ let g:ctrlp_cmd = 'CtrlP'
 
 " ctrlp ignore gitignored files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+
+" Show hidden files (starting wit .) in NerdTree
+let NERDTreeShowHidden=1
 
 " Open Nerdtree and startify correctly at the same time when starting vim
 autocmd VimEnter *
