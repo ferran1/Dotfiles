@@ -1,25 +1,24 @@
 {
-    "editor.formatOnSave": true,
-    "files.autoSave": "afterDelay",
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "editor.scrollBeyondLastLine": false,
-    "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "workbench.colorTheme": "Visual Studio Dark",
-       "editor.lineHeight": 25,
-       "editor.letterSpacing": 0.5,
-       "files.trimTrailingWhitespace": true,
-       "editor.fontWeight": "400",
-       "prettier.eslintIntegration": true,
-       "editor.cursorBlinking": "solid",
-    "editor.renderWhitespace": "all",
-    "terminal.integrated.gpuAcceleration": "off",
-    "C_Cpp.updateChannel": "Insiders",
+  "editor.formatOnSave": true,
+  "files.autoSave": "afterDelay",
+  "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook"
+  },
+  "editor.scrollBeyondLastLine": false,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.colorTheme": "Vim Dark Hard",
+  "editor.lineHeight": 25,
+  "editor.letterSpacing": 0.5,
+  "files.trimTrailingWhitespace": true,
+  "editor.fontWeight": "400",
+  "prettier.eslintIntegration": true,
+  "editor.cursorBlinking": "solid",
+  "editor.renderWhitespace": "all",
+  "terminal.integrated.gpuAcceleration": "off",
+  "C_Cpp.updateChannel": "Insiders"
 
-
-    /**
-    * Vim settings
-    **/
+  /**
+   * Vim settings
+   **/
 }
