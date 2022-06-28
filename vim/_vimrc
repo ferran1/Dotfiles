@@ -56,13 +56,9 @@ set autoread
 
 set backspace=2
 set laststatus=2 " Always show the statusbar
-set clipboard=unnamedplus
-set mouse=a
+set clipboard=unnamed
 set nu
 set relativenumber " Turn on line numbering
-
-"Necessary for syntax highlighting in vimrc
-filetype indent plugin on
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -101,7 +97,7 @@ else
   endif
 endif
 
-" Remap Esc to exit terminal
+" Remap Esc to exit vim terminal (:ter)
 :tnoremap <Esc> <C-\><C-n>
 
 " Correct comment highlighting
@@ -154,7 +150,6 @@ au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b
 " Set filetype for python
 autocmd BufNewFile,BufRead *.py set ft=python
 
-filetype on
 filetype plugin indent on
 setlocal nowrap
 
