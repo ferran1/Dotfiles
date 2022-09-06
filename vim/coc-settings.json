@@ -7,7 +7,8 @@
     "json",
     "javascriptreact",
     "typescript.tsx",
-    "graphql"
+    "graphql",
+    "php"
   ],
   "python.analysis.diagnosticMode": "workspace",
   "eslint.run": "onSave",

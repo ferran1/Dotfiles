@@ -1,0 +1,55 @@
+" IDEAVIM setttings
+" On Windows, this file should be located at: (C:)/users/name/.ideavimrc
+"
+set clipboard+=unnamed
+
+" Plugins
+set surround
+" cs"'
+set commentary
+" gc
+
+" WHITESPACE (default)
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+
+" SEARCHING FOR FILES
+set showmatch
+set incsearch
+set hlsearch
+set ignorecase
+set smartcase
+
+" CREATE/SAVE FILES
+nnoremap ,w :w<CR>
+set autoread
+set hidden
+set undofile
+set undodir=$HOME/.vim/undo//
+set backup
+set backupdir=$HOME/.vim/backup//
+set noswapfile
+
+" Browsing text
+set number
+set relativenumber
+set wrap linebreak nolist
+set tw=480
+set foldenable
+set mouse=a
+
+" Remap kj and jk to esc
+inoremap jk <esc>
+inoremap kj <esc>
+
+" Map \r to the Reformat Code action
+map \r <Action>(ReformatCode)
+
+" Map <leader>d to start debug
+map <leader>d <Action>(Debug)
+
+" \f to go to a file
+map <leader>f <Action>(GotoFile)

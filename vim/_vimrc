@@ -9,7 +9,6 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 Plug 'dense-analysis/ale'
-
 Plug 'scrooloose/nerdtree'
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
@@ -17,6 +16,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'majutsushi/tagbar'
 Plug 'alvan/vim-closetag'
+Plug '907th/vim-auto-save'
 
 " Autocompletes
 Plug 'vim-scripts/AutoComplPop'
@@ -30,6 +30,12 @@ Plug 'neomake/neomake'
 " Syntax highlighting for JS
 Plug 'pangloss/vim-javascript'
 
+" Syntax highlighting for twig templates
+Plug 'beyondwords/vim-twig'
+
+" PHP code completion etc tools
+Plug 'phpactor/phpactor', {'for': 'php', 'tag': '*', 'do': 'composer install --no-dev -o'}
+
 " Fuzzy finder in vim
 Plug 'kien/ctrlp.vim'
 
@@ -37,6 +43,8 @@ Plug 'kien/ctrlp.vim'
 Plug 'mhinz/vim-startify'
 
 Plug 'chrisbra/Colorizer'
+
+Plug 'luochen1990/rainbow'
 
 " Maximize window/split with <f3>
 Plug 'szw/vim-maximizer'
@@ -53,6 +61,7 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 call plug#end()
 
 set autoread
+set splitright " New vertical splits are on the right
 
 set backspace=2
 set laststatus=2 " Always show the statusbar
@@ -117,6 +126,8 @@ set smartcase
 " Automatically change directory
 set autochdir
 
+autocmd BufEnter * silent! lcd %:p:h
+
 set encoding=utf-8
 set fileencoding=utf-8
 
@@ -150,6 +161,7 @@ au FileType python let b:AutoPairs = AutoPairsDefine({"f'" : "'", "r'" : "'", "b
 " Set filetype for python
 autocmd BufNewFile,BufRead *.py set ft=python
 
+"filetype on
 filetype plugin indent on
 setlocal nowrap
 
@@ -182,6 +194,8 @@ let g:coc_global_extensions = [
 			\ 'coc-markdownlint',
 			\ 'coc-html',
 			\ 'coc-css',
+			\ 'coc-phpactor',
+			\ 'coc-php-cs-fixer'
 \ ]
 
 "--- Coc config ---
@@ -257,13 +271,25 @@ let g:gitgutter_map_keys = 0
 " Tagbar Settings
 nmap <f8> :TagbarToggle<CR>
 
+" Enables rainbow parentheses globally
+let g:rainbow_active = 1
+
 " Fugitive vim remaps
 nmap <leader>gs :G<CR>
 nmap <leader>gu :diffget //2<CR>
 nmap <leader>gs :G<CR>
 
+let g:auto_save = 0 "Disable autosave plugin globally on startup (:AutoSaveToggle to enable or disable)
+
+"remap auto save toggle to <leader>a
+nmap <leader>a :AutoSaveToggle<CR>
+
 " NERDTree vim remaps
 nmap <F6> :NERDTreeToggle<CR>
+
+" Display relative line numbers in NERDTree for jumping around files
+let NERDTreeShowLineNumbers=1
+autocmd FileType nerdtree setlocal relativenumber
 
 " Switch between splits
 nmap <C-h> <C-w>h
@@ -300,7 +326,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " ctrlp ignore gitignored files
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
-" Show hidden files (starting wit .) in NerdTree
+" Show hidden files (starting with .) in NerdTree
 let NERDTreeShowHidden=1
 
 " Open Nerdtree and startify correctly at the same time when starting vim
@@ -311,6 +337,8 @@ autocmd VimEnter *
 \ | NERDTree
 \ | wincmd w
 \ | endif
+
+ map <leader>r :NERDTreeFind<cr>
 
 " vim jinja config
 au BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
@@ -335,7 +363,7 @@ let g:sneak#label = 1
 " filenames like *.xml, *.html, *.xhtml, ...
 " These are the file extensions where this plugin is enabled.
 "
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml'
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.twig'
 
 " filenames like *.xml, *.xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
@@ -345,7 +373,7 @@ let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 " filetypes like xml, html, xhtml, ...
 " These are the file types where this plugin is enabled.
 "
-let g:closetag_filetypes = 'html,xhtml,phtml'
+let g:closetag_filetypes = 'html,xhtml,phtml,xml,twig'
 
 " filetypes like xml, xhtml, ...
 " This will make the list of non-closing tags self-closing in the specified files.
